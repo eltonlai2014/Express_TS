@@ -3,8 +3,9 @@ import path from "path";
 import cors from "cors";
 import helmet from "helmet";
 import dotenv from "dotenv";
+import { TestRoute } from "./routes/TestRoute";
 
-export class App {
+export class WebServer {
   private app = express();
 
   constructor() {
@@ -18,7 +19,7 @@ export class App {
   // @Public Methods
   // ====================================================================
 
-  public bootstrap(): void {
+  public start(): void {
     this.app.listen(process.env.PORT, () =>
       console.log(`API Server is running at port ${process.env.PORT}.`)
     );
@@ -46,6 +47,9 @@ export class App {
   }
 
   private registerRoute(): void {
+
+		const testRoute = new TestRoute();
     this.app.get("/", (req, res, next) => res.send("Hello!"));
+		this.app.use("/Test", testRoute.router);
   }
 }

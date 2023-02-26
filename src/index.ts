@@ -1,8 +1,8 @@
-import { App } from "./app";
+import { WebServer } from "./WebServer";
 
-const bootstrap = () => {
-  const app = new App();
-  app.bootstrap();
+const start = () => {
+  const server = new WebServer();
+  server.start();
 };
 
-bootstrap();
+start();
